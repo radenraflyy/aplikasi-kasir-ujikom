@@ -1,16 +1,22 @@
 "use client"
 import React, { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined"
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration"
 import ArchiveIcon from "@mui/icons-material/Archive"
 import CoPresentIcon from "@mui/icons-material/CoPresent"
 import MenuIcon from "@mui/icons-material/Menu"
-import Image from "next/image"
-import { kasirLogo } from "../../../../../public/image"
+import CreateIcon from "@mui/icons-material/Create"
 
 const SideBarLayout = () => {
+  const router = usePathname()
+
+  // State Menu
   const [isOpen, setIsOpen] = useState(false)
+
+  console.log(router)
+
   const menuSidebar = [
     {
       name: "Dashboard",
@@ -28,9 +34,14 @@ const SideBarLayout = () => {
       icon: <ArchiveIcon />,
     },
     {
-      name: "Create Employee",
-      path: "/create/employee",
+      name: "Create Customer",
+      path: "/customer",
       icon: <CoPresentIcon />,
+    },
+    {
+      name: "Create Petugas",
+      path: "/petugas",
+      icon: <CreateIcon />,
     },
   ]
 
@@ -54,10 +65,14 @@ const SideBarLayout = () => {
             <div key={index}>
               <Link
                 href={item.path}
-                className="bg-white flex items-center gap-x-2 mt-7 p-3"
+                className={`border-2 flex items-center gap-x-2 mt-7 p-3  hover:text-[#4d71b9] hover:bg-slate-50 transition-all ease-in-out delay-75 rounded-md ${
+                  router === item.path
+                    ? "text-[#4d71b9] bg-slate-50"
+                    : "text-white"
+                } `}
               >
                 {item.icon}
-                <h2 className="font-semibold text-[#4d71b9]">{item.name}</h2>
+                <h2 className="font-semibold">{item.name}</h2>
               </Link>
             </div>
           ))}

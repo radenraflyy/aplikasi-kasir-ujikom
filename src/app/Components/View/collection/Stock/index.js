@@ -1,26 +1,15 @@
 "use client"
 import React, { useState } from "react"
-import SideBarLayout from "../../Layout/sidebar"
+import SideBarLayout from "../../../Layout/sidebar"
 import { Box, Grid } from "@mui/material"
 import { TextField, Button, FormLabel, Typography } from "@mui/material"
-import TableListCollection from "../../Collection/TableListCollection"
-import ModalCreateProduct from "./Modal/create"
-import ModalEditProduct from "./Modal/edit"
-import useFetchCollection from "../../../../fetch/collection"
-
-const CollectionView = () => {
-  const {
-    dataDetailCollection,
-    valueCollection,
-    cretaCollection,
-    setValueCollection,
-    setDataDetailCollection,
-    editCollection,
-    getFindByIdCollection,
-  } = useFetchCollection()
+import TableStock from "../../../Collection/TableStock"
+import ModalCreateStock from "./ModalCreateStock"
+import useFetchStock from "../../../../../fetch/stock"
+const StockBarang = () => {
+  const { valueStock, setValueStock, addStockFetch, dataStock } =
+    useFetchStock()
   const [closeModal, setCloseModal] = useState(false)
-  const [closeModalEdit, setCloseModalEdit] = useState(false)
-
   return (
     <>
       <div className="bg-gray-100">
@@ -39,7 +28,7 @@ const CollectionView = () => {
             }}
           >
             <h1 className="font-bold uppercase md:text-xl text-md max-sm:mx-auto">
-              All Data Collections
+              All Data Stock Barang
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-x-4 max-sm:gap-y-2">
               <TextField
@@ -53,38 +42,26 @@ const CollectionView = () => {
                 size="large"
                 className="max-sm:w-full"
               >
-                Create Product
+                Tambah Stock
               </Button>
             </div>
           </Box>
           <Grid container columns={{ xs: 6, md: 12 }}>
-            <TableListCollection
-              getFindByIdCollection={getFindByIdCollection}
-              setCloseModalEdit={setCloseModalEdit}
-            />
+            <TableStock />
           </Grid>
         </Box>
       </div>
       {closeModal && (
-        <ModalCreateProduct
+        <ModalCreateStock
           setCloseModal={setCloseModal}
-          cretaCollection={cretaCollection}
-          setValueCollection={setValueCollection}
-          valueCollection={valueCollection}
-        />
-      )}
-      {closeModalEdit && (
-        <ModalEditProduct
-          setCloseModalEdit={setCloseModalEdit}
-          setDataDetailCollection={setDataDetailCollection}
-          dataDetailCollection={dataDetailCollection}
-          updateCL={editCollection}
-          setValueCL={setValueCollection}
-          valueCL={valueCollection}
+          setValueStock={setValueStock}
+          valueStock={valueStock}
+          addStockFetch={addStockFetch}
+          data={dataStock}
         />
       )}
     </>
   )
 }
 
-export default CollectionView
+export default StockBarang

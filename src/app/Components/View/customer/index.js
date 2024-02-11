@@ -3,23 +3,20 @@ import React, { useState } from "react"
 import SideBarLayout from "../../Layout/sidebar"
 import { Box, Grid } from "@mui/material"
 import { TextField, Button, FormLabel, Typography } from "@mui/material"
-import TableListCollection from "../../Collection/TableListCollection"
-import ModalCreateProduct from "./Modal/create"
-import ModalEditProduct from "./Modal/edit"
-import useFetchCollection from "../../../../fetch/collection"
-
-const CollectionView = () => {
-  const {
-    dataDetailCollection,
-    valueCollection,
-    cretaCollection,
-    setValueCollection,
-    setDataDetailCollection,
-    editCollection,
-    getFindByIdCollection,
-  } = useFetchCollection()
+import TableListCustomer from "../../Customer"
+import ModalCreateCustomer from "./Modal/create"
+import ModalEditCustomer from "./Modal/edit"
+import useFetchCustomer from "../../../../fetch/customer"
+const CustomerView = () => {
   const [closeModal, setCloseModal] = useState(false)
-  const [closeModalEdit, setCloseModalEdit] = useState(false)
+  const [openModalEdit, setOpenModalEdit] = useState(false)
+
+  const {
+    fetchCreateCustomer,
+    fetchEditCustomer,
+    createCustomer,
+    setCreateCustomer,
+  } = useFetchCustomer()
 
   return (
     <>
@@ -39,7 +36,7 @@ const CollectionView = () => {
             }}
           >
             <h1 className="font-bold uppercase md:text-xl text-md max-sm:mx-auto">
-              All Data Collections
+              All Data Customer
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-x-4 max-sm:gap-y-2">
               <TextField
@@ -53,38 +50,36 @@ const CollectionView = () => {
                 size="large"
                 className="max-sm:w-full"
               >
-                Create Product
+                Create Customer
               </Button>
             </div>
           </Box>
           <Grid container columns={{ xs: 6, md: 12 }}>
-            <TableListCollection
-              getFindByIdCollection={getFindByIdCollection}
-              setCloseModalEdit={setCloseModalEdit}
+            <TableListCustomer
+              openModal={setOpenModalEdit}
+              setDataEdit={setCreateCustomer}
             />
           </Grid>
         </Box>
       </div>
       {closeModal && (
-        <ModalCreateProduct
+        <ModalCreateCustomer
           setCloseModal={setCloseModal}
-          cretaCollection={cretaCollection}
-          setValueCollection={setValueCollection}
-          valueCollection={valueCollection}
+          createCustomer={createCustomer}
+          setCreateCustomer={setCreateCustomer}
+          fetchCreateCustomer={fetchCreateCustomer}
         />
       )}
-      {closeModalEdit && (
-        <ModalEditProduct
-          setCloseModalEdit={setCloseModalEdit}
-          setDataDetailCollection={setDataDetailCollection}
-          dataDetailCollection={dataDetailCollection}
-          updateCL={editCollection}
-          setValueCL={setValueCollection}
-          valueCL={valueCollection}
+      {openModalEdit && (
+        <ModalEditCustomer
+          setCloseModal={setOpenModalEdit}
+          fetchEditCustomer={fetchEditCustomer}
+          setCreateCustomer={setCreateCustomer}
+          createCustomer={createCustomer}
         />
       )}
     </>
   )
 }
 
-export default CollectionView
+export default CustomerView

@@ -5,7 +5,7 @@ import { Paper } from "@mui/material"
 
 export default function MarkLinechart() {
   return (
-    <Paper sx={{padding: "10px"}}>
+    <Paper sx={{ padding: "10px", width: "100%", height: "400px" }}>
       <LineChart
         xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
         series={[
@@ -14,8 +14,6 @@ export default function MarkLinechart() {
             showMark: ({ index }) => index % 2 === 0,
           },
         ]}
-        width={570}
-        height={380}
       />
     </Paper>
   )

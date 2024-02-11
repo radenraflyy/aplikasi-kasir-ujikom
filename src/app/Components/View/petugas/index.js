@@ -3,24 +3,10 @@ import React, { useState } from "react"
 import SideBarLayout from "../../Layout/sidebar"
 import { Box, Grid } from "@mui/material"
 import { TextField, Button, FormLabel, Typography } from "@mui/material"
-import TableListCollection from "../../Collection/TableListCollection"
-import ModalCreateProduct from "./Modal/create"
-import ModalEditProduct from "./Modal/edit"
-import useFetchCollection from "../../../../fetch/collection"
-
-const CollectionView = () => {
-  const {
-    dataDetailCollection,
-    valueCollection,
-    cretaCollection,
-    setValueCollection,
-    setDataDetailCollection,
-    editCollection,
-    getFindByIdCollection,
-  } = useFetchCollection()
+import TableListPetugas from "../../Petugas"
+import ModalCreatePetugas from "./ModalCreatePetugas"
+const PetugasView = () => {
   const [closeModal, setCloseModal] = useState(false)
-  const [closeModalEdit, setCloseModalEdit] = useState(false)
-
   return (
     <>
       <div className="bg-gray-100">
@@ -39,7 +25,7 @@ const CollectionView = () => {
             }}
           >
             <h1 className="font-bold uppercase md:text-xl text-md max-sm:mx-auto">
-              All Data Collections
+              All Data Petugas
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-x-4 max-sm:gap-y-2">
               <TextField
@@ -53,38 +39,18 @@ const CollectionView = () => {
                 size="large"
                 className="max-sm:w-full"
               >
-                Create Product
+                Create Petugas
               </Button>
             </div>
           </Box>
           <Grid container columns={{ xs: 6, md: 12 }}>
-            <TableListCollection
-              getFindByIdCollection={getFindByIdCollection}
-              setCloseModalEdit={setCloseModalEdit}
-            />
+            <TableListPetugas />
           </Grid>
         </Box>
       </div>
-      {closeModal && (
-        <ModalCreateProduct
-          setCloseModal={setCloseModal}
-          cretaCollection={cretaCollection}
-          setValueCollection={setValueCollection}
-          valueCollection={valueCollection}
-        />
-      )}
-      {closeModalEdit && (
-        <ModalEditProduct
-          setCloseModalEdit={setCloseModalEdit}
-          setDataDetailCollection={setDataDetailCollection}
-          dataDetailCollection={dataDetailCollection}
-          updateCL={editCollection}
-          setValueCL={setValueCollection}
-          valueCL={valueCollection}
-        />
-      )}
+      {closeModal && <ModalCreatePetugas setCloseModal={setCloseModal} />}
     </>
   )
 }
 
-export default CollectionView
+export default PetugasView

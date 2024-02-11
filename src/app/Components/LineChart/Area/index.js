@@ -5,7 +5,7 @@ import { Paper } from "@mui/material"
 
 export default function LineChartArea() {
   return (
-    <Paper sx={{padding: "10px"}}>
+    <Paper sx={{ padding: "10px", width: "100%", height: "400px" }}>
       <LineChart
         xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
         series={[
@@ -14,8 +14,6 @@ export default function LineChartArea() {
             area: true,
           },
         ]}
-        width={570}
-        height={380}
       />
     </Paper>
   )

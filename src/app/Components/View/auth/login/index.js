@@ -1,16 +1,7 @@
 import React from "react"
 import AuthLayout from "../../../Layout/auth"
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  FormControl,
-  FormLabel,
-  CardActions,
-  Button,
-} from "@mui/material"
+import FormControlLogin from "../formLogin"
+import { Box, Card, CardContent, Typography } from "@mui/material"
 
 const ViewLogin = () => {
   return (
@@ -31,7 +22,7 @@ const ViewLogin = () => {
               flexDirection: "column",
               justifyContent: "center",
               padding: 0,
-              width: "100%"
+              width: "100%",
             }}
           >
             <Typography
@@ -42,35 +33,8 @@ const ViewLogin = () => {
             >
               Login To Kasir
             </Typography>
-            <FormControl>
-              <FormLabel htmlFor="my-input" sx={{ marginBottom: "5px" }}>
-                <Typography component="span" color={"red"} fontSize={"xlarge"}>
-                  *
-                </Typography>
-                Email address
-              </FormLabel>
-              <TextField label="Email" id="outlined-size-small" size="small" />
-              <FormLabel
-                htmlFor="my-input"
-                sx={{ marginBottom: "5px", marginTop: "14px" }}
-              >
-                <Typography component="span" color={"red"} fontSize={"xlarge"}>
-                  *
-                </Typography>
-                Password
-              </FormLabel>
-              <TextField
-                label="Password"
-                id="outlined-size-small"
-                size="small"
-              />
-            </FormControl>
+            <FormControlLogin />
           </CardContent>
-          <CardActions sx={{ backgroundColor: "#033EB1", marginTop: 2 }}>
-            <Button size="small" sx={{ color: "white", width: "100%" }}>
-              Login
-            </Button>
-          </CardActions>
         </Card>
       </Box>
     </AuthLayout>

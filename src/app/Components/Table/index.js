@@ -36,11 +36,13 @@ export default function TableK() {
           </TableHead>
           {[1, 2, 3, 4, 5].map((item) => (
             <>
-              <TableBody key={item}>
-                <TableCell align="center">Chitos</TableCell>
-                <TableCell align="center">12121</TableCell>
-                <TableCell align="center">50</TableCell>
-                <TableCell align="center">Klik</TableCell>
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center">Chitos</TableCell>
+                  <TableCell align="center">12121</TableCell>
+                  <TableCell align="center">50</TableCell>
+                  <TableCell align="center">Klik</TableCell>
+                </TableRow>
               </TableBody>
             </>
           ))}

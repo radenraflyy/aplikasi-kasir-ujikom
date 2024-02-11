@@ -1,5 +1,6 @@
 import prisma from "../../../../../lib/prisma"
 import { hash } from "bcrypt"
+import midlleware from "../../../../midlleware"
 
 export async function POST(request) {
   try {
@@ -46,6 +47,35 @@ export async function POST(request) {
       message: "Successfully Registrasi User",
       status: 201,
     })
+  } catch (error) {
+    return Response.json({
+      error: "Error registration : " + error,
+      status: 500,
+    })
+  }
+}
+
+export async function GET(request) {
+  try {
+    const res = await prisma.user.findMany({
+      where: {
+        role: {
+          name: "petugas",
+        },
+      },
+      select:{
+        id: true,
+        name: true,
+        email: true,
+        role: {
+          select: {
+            name: true
+          }
+        }
+      }
+    })
+
+    return midlleware(request, res, "Successfully Get All Data User", 200)
   } catch (error) {
     return Response.json({
       error: "Error registration : " + error,
