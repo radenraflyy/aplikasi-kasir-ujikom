@@ -17,12 +17,8 @@ const index = ({
   }
 
   const onSubmit = async (id) => {
-    if (valueCL.name !== "" && valueCL.price !== 0) {
-      await updateCL(id)
-      await handleClose()
-    } else {
-      alert("name and price must be filled")
-    }
+    await updateCL(id)
+    await handleClose()
   }
   return (
     <Modal onClose={() => handleClose()}>
@@ -45,9 +41,7 @@ const index = ({
           </FormLabel>
           <TextField
             defaultValue={dataDetailCollection?.nameProduct}
-            onChange={(e) =>
-              setValueCL({ ...valueCL, name: e.target.value })
-            }
+            onChange={(e) => setValueCL({ ...valueCL, name: e.target.value })}
             placeholder="Product"
             size="small"
             fullWidth

@@ -53,7 +53,6 @@ export default function TableListCollection({
             <StyledTableCell align="center">Price</StyledTableCell>
             <StyledTableCell align="center">Stock</StyledTableCell>
             <StyledTableCell align="center">Sale / Detail Sale</StyledTableCell>
-            <StyledTableCell align="center">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,29 +68,6 @@ export default function TableListCollection({
                 {formarRupiah(row.price)}
               </StyledTableCell>
               <StyledTableCell align="center">{row.stock}</StyledTableCell>
-              <StyledTableCell align="center">
-                {row.detailsaleId ? (
-                  <Tooltip title="Sale" placement="top">
-                    <Button
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-md"
-                      size="small"
-                      type="button"
-                    >
-                      <VisibilityIcon fontSize="small" />
-                    </Button>
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Detail Sale" placement="top">
-                    <Button
-                      className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-md"
-                      size="small"
-                      type="button"
-                    >
-                      <VisibilityIcon fontSize="small" />
-                    </Button>
-                  </Tooltip>
-                )}
-              </StyledTableCell>
               <StyledTableCell align="center">
                 <div className="flex flex-wrap justify-center gap-2 items-center">
                   <Button

@@ -5,12 +5,15 @@ export async function POST(request) {
   try {
     const { saleId, productId } = await request.json()
 
-    console.log(saleId)
-    console.log(productId)
-
     const getSale = await prisma.sale.findUnique({
       where: {
         id: saleId,
+      },
+      select: {
+        customer: true,
+        dateSale: true,
+        sumPrice: true,
+        id: true,
       },
     })
 
@@ -26,8 +29,6 @@ export async function POST(request) {
         id: productId,
       },
     })
-
-    console.log(getProuct.length)
 
     if (getProuct.length === 0) {
       return Response.json({
@@ -62,17 +63,31 @@ export async function POST(request) {
       },
     })
 
-    // return Response.json({
-    //   data: { res: res, sale: getSale, product: getProuct },
-    //   msg: "Successfully Create Data Detailsale",
-    //   status: 201,
-    // })
     const data = {
       res,
       sale: getSale,
-      product: getProuct
+      product: getProuct,
     }
     return middleware(request, data, "Successfully Create Data Detailsale", 201)
+  } catch (error) {
+    console.error(error)
+    return Response.json({ error: error, status: 500 })
+  }
+}
+
+export async function GET(request) {
+  try {
+    const res = await prisma.detailsale.findMany({
+      orderBy: { id: "asc" },
+      select: {
+        sale: true,
+        products: true,
+        subTotal: true,
+        sumProduct: true,
+      },
+    })
+
+    return middleware(request, res, "Successfully Get All Data Detailsale", 200)
   } catch (error) {
     console.error(error)
     return Response.json({ error: error, status: 500 })

@@ -40,3 +40,17 @@ export async function POST(request) {
     return Response.json({ error: "Internal Servel Error", status: 500 })
   }
 }
+
+export async function GET(request) {
+  try {
+    const res = await prisma.sale.findMany({
+      orderBy: { customerId: "asc" },
+      select: { customer: true, dateSale: true, id: true, sumPrice: true },
+    })
+
+    return middleware(request, res, "Successfully Get All Data sale", 200)
+  } catch (error) {
+    console.error(error)
+    return Response.json({ error: error, status: 500 })
+  }
+}

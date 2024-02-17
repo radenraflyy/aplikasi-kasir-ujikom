@@ -7,17 +7,22 @@ import TableListCollection from "../../Collection/TableListCollection"
 import ModalCreateProduct from "./Modal/create"
 import ModalEditProduct from "./Modal/edit"
 import useFetchCollection from "../../../../fetch/collection"
+import useFetchCustomer from "../../../../fetch/customer"
 
 const CollectionView = () => {
   const {
     dataDetailCollection,
     valueCollection,
+    dataSale,
     cretaCollection,
     setValueCollection,
     setDataDetailCollection,
     editCollection,
     getFindByIdCollection,
+    SaleProduct,
+    setDataSale,
   } = useFetchCollection()
+  const { dataCustomer } = useFetchCustomer()
   const [closeModal, setCloseModal] = useState(false)
   const [closeModalEdit, setCloseModalEdit] = useState(false)
 
