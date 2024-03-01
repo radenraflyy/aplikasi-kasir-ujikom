@@ -16,6 +16,7 @@ const useFetchAuth = () => {
       const response = await instance.post("/auth/login", { email, password })
       if (response.data.status === 200) {
         setCookie("token", response.data.data.token)
+        setCookie("role", response.data.data.data.role.name)
         setEmail("")
         setPassword("")
         setIsLoading(false)

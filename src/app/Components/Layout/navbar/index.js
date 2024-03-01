@@ -10,12 +10,35 @@ import Container from "@mui/material/Container"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
 import Image from "next/image"
+import { deleteCookie } from "cookies-next"
+import { useRouter } from "next/navigation"
 import { userKsr, kasirLogo } from "../../../../../public/image"
-
-const settings = ["Account", "Logout"]
 
 function NavbarLayout() {
   const [anchorElUser, setAnchorElUser] = useState(null)
+  const { push } = useRouter()
+  const handleLogout = () => {
+    deleteCookie("token")
+    deleteCookie("role")
+    push("/auth/login")
+  }
+
+  const settings = [
+    {
+      path: "/",
+      name: "Account",
+      action: () => {
+        alert("Account")
+      },
+    },
+    {
+      path: "/auth/login",
+      name: "Logout",
+      action: () => {
+        handleLogout()
+      },
+    },
+  ]
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
@@ -69,9 +92,9 @@ function NavbarLayout() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {settings.map((setting, i) => (
+                <MenuItem key={i} onClick={setting.action}>
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
